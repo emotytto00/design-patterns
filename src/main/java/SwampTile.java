@@ -8,6 +8,6 @@ public class SwampTile implements Tile {
         return "Swamp";
     }
     public void action() {
-        System.out.println("You are in a swamp. You are stuck and can't move.");
+        System.out.println("This is a swamp.");
     }
 }

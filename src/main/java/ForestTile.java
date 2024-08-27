@@ -8,7 +8,7 @@ public class ForestTile implements Tile {
         return "Forest";
     }
     public void action() {
-        System.out.println("You are in a forest. You can move.");
+        System.out.println("This is a forest.");
     }
 
 }

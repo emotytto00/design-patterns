@@ -8,6 +8,6 @@ public class BuildingTile implements Tile{
         return "Building";
     }
     public void action() {
-        System.out.println("You are in a building. You can rest and recover.");
+        System.out.println("This is a building.");
     }
 }
