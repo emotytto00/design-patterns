@@ -15,7 +15,7 @@ public class RapGame extends GameClass {
     @Override
     public void initializeGame(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
-        this.maxRounds = 5;
+        this.maxRounds = 3;
         this.currentRound = 0;
         this.rhymes = new ArrayList<>();
         this.scanner = new Scanner(System.in);
