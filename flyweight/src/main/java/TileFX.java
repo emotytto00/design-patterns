@@ -1,6 +1,6 @@
 import javafx.scene.canvas.GraphicsContext;
 
-public interface Tile {
+public interface TileFX {
     char getCharacter();
     String getType();
 
