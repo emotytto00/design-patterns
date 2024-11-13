@@ -2,7 +2,7 @@ public class BridgeMain {
     public static void main(String[] args) {
         testDevice(new TV());
         testDevice(new Radio());
-        testSmartRemote(new SmartTV());
+        testSmartDevice(new SmartTV());
     }
 
     public static void testDevice(Device device) {
@@ -17,7 +17,7 @@ public class BridgeMain {
         advancedRemote.mute();
         device.printStatus();
     }
-    public static void testSmartRemote(SmartTV smartDevice) {
+    public static void testSmartDevice(SmartTV smartDevice) {
         System.out.println("Tests with smart remote.");
         SmartRemote smartRemote = new SmartRemote(smartDevice);
         smartRemote.power();
