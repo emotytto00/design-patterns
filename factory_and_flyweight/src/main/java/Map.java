@@ -1,6 +1,10 @@
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+
 import java.util.Random;
 
-abstract class Map {
+public abstract class Map {
     protected int width;
     protected int height;
     protected Tile[][] tiles;
@@ -23,12 +27,16 @@ abstract class Map {
         }
     }
 
-    public void display() {
+    public void render(Canvas canvas) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        int tileSize = 32;  // Each tile will be 32x32 pixels
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                System.out.print(tiles[i][j].getCharacter() + " ");
+                Image tileImage = TileGraphicFactory.getTileGraphic(tiles[i][j].getType());
+                if (tileImage != null) {
+                    gc.drawImage(tileImage, j * tileSize, i * tileSize, tileSize, tileSize);
+                }
             }
-            System.out.println();
         }
     }
 }

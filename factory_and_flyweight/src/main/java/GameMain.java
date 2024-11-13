@@ -1,6 +1,5 @@
 public class GameMain {
     public static void main(String[] args) {
-        GameFX.launch(GameFX.class, args);
-
+        Game.launch(Game.class, args);
     }
 }
