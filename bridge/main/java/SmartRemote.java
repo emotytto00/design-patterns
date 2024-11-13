@@ -19,7 +19,7 @@ public class SmartRemote extends BasicRemote {
     }
 
     public void playGames() {
-        System.out.println("Remote: play games");
+        System.out.println("Remote: play games. I'm having so much fun!");
         ((SmartTV) device).playGames();
     }
 }

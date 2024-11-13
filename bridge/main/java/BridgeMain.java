@@ -22,6 +22,7 @@ public class BridgeMain {
         SmartRemote smartRemote = new SmartRemote(smartDevice);
         smartRemote.power();
         smartRemote.connectToWiFi();
+        smartRemote.playGames();
         smartDevice.printStatus();
     }
 }
