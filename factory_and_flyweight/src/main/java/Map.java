@@ -29,7 +29,7 @@ public abstract class Map {
 
     public void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        int tileSize = 32;  // Each tile will be 32x32 pixels
+        int tileSize = 32;
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 Image tileImage = TileGraphicFactory.getTileGraphic(tiles[i][j].getType());
@@ -40,3 +40,4 @@ public abstract class Map {
         }
     }
 }
+

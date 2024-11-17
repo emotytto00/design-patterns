@@ -13,19 +13,40 @@ public class TileGraphicFactory {
     }
 
     private static Image loadImageForTile(String type) {
+        String imagePath = null;
+
         switch (type) {
             case "Road":
-                return new Image("/road.png");
+                imagePath = "road.png";
+                break;
             case "Forest":
-                return new Image("/forest.png");
+                imagePath = "forest.png";
+                break;
             case "Building":
-                return new Image("/building.png");
+                imagePath = "building.png";
+                break;
             case "Swamp":
-                return new Image("/swamp.png");
+                imagePath = "swamp.png";
+                break;
             case "Water":
-                return new Image("/water.png");
+                imagePath = "water.png";
+                break;
             default:
+                System.out.println("Unknown tile type: " + type);
                 return null;
+        }
+
+        try {
+            Image image = new Image(TileGraphicFactory.class.getClassLoader().getResourceAsStream(imagePath));
+            if (image == null || image.isError()) {
+                System.out.println("Error loading image for type: " + type + " from path: " + imagePath);
+                return null;
+            }
+            return image;
+        } catch (Exception e) {
+            System.out.println("Exception loading image for type: " + type + " from path: " + imagePath);
+            e.printStackTrace();
+            return null;
         }
     }
 }

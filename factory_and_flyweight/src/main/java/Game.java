@@ -10,18 +10,14 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Initialize map
-        int width = 10;  // You can ask the user for width and height like before
+        int width = 10;
         int height = 10;
-        map = createMap(1, width, height);  // Example: CityMap, can be selected by user
+        map = createMap(1, width, height);
 
-        // Create a Canvas to render the map
-        Canvas canvas = new Canvas(width * 32, height * 32);  // Assuming each tile is 32x32 pixels
+        Canvas canvas = new Canvas(width * 32, height * 32);
 
-        // Render the map
         map.render(canvas);
 
-        // Set up the JavaFX scene
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
         Scene scene = new Scene(root, width * 32, height * 32);
