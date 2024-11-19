@@ -1,14 +1,13 @@
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
 import java.util.Random;
 
 public abstract class Map {
     protected int width;
     protected int height;
     protected Tile[][] tiles;
-    protected Random random = new Random();
+    protected final Random random = new Random();
 
     public Map(int width, int height) {
         this.width = width;
@@ -30,6 +29,7 @@ public abstract class Map {
     public void render(Canvas canvas) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         int tileSize = 32;
+
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 Image tileImage = TileGraphicFactory.getTileGraphic(tiles[i][j].getType());

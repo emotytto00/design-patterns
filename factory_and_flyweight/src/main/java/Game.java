@@ -4,15 +4,25 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import java.util.Scanner;
+
 public class Game extends Application {
 
     private Map map;
+    int width;
+    int height;
+
 
     @Override
     public void start(Stage primaryStage) {
-        int width = 10;
-        int height = 10;
-        map = createMap(1, width, height);
+        System.out.println("Enter 1 for City Map or 2 for Wilderness Map");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        System.out.println("Enter width of map");
+        width = scanner.nextInt();
+        System.out.println("Enter height of map");
+        height = scanner.nextInt();
+        map = createMap(choice, width, height);
 
         Canvas canvas = new Canvas(width * 32, height * 32);
 
@@ -22,7 +32,7 @@ public class Game extends Application {
         root.getChildren().add(canvas);
         Scene scene = new Scene(root, width * 32, height * 32);
 
-        primaryStage.setTitle("RPG Map");
+        primaryStage.setTitle("Map");
         primaryStage.setScene(scene);
         primaryStage.show();
     }

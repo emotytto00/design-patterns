@@ -7,10 +7,9 @@ class CityMap extends Map {
     protected Tile createTile() {
         int randomTile = random.nextInt(3);
         return switch (randomTile) {
-            case 0 -> new RoadTile();
-            case 1 -> new ForestTile();
+            case 1 -> new RoadTile();
             case 2 -> new BuildingTile();
-            default -> new RoadTile();
+            default -> new ForestTile();
         };
     }
 }
