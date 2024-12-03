@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -10,31 +11,30 @@ import org.json.simple.parser.ParseException;
 public class ApiFacade {
 
     public String getAttributeValueFromJson(String urlString, String attributeName) throws IllegalArgumentException, IOException {
-        // Step 1: Make HTTP request and retrieve JSON
-        String jsonResponse = makeHttpGetRequest(urlString);
+        String jsonResponse = fetchJson(urlString);
 
-        // Step 2: Parse JSON and extract the desired attribute
-        return parseJsonForAttribute(jsonResponse, attributeName);
+        return parseJson(jsonResponse, attributeName);
     }
 
-    private String makeHttpGetRequest(String urlString) throws IOException {
-        HttpURLConnection connection = null;
+    private String fetchJson(String urlString) throws IOException {
         StringBuilder response = new StringBuilder();
+        HttpURLConnection connection = null;
 
         try {
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
-            // Read the response
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     response.append(line);
                 }
             }
-        } catch (IOException e) {
-            throw new IOException("Error occurred while making HTTP GET request: " + e.getMessage());
+
+            if (connection.getResponseCode() != 200) {
+                throw new IOException("HTTP error code: " + connection.getResponseCode());
+            }
         } finally {
             if (connection != null) {
                 connection.disconnect();
@@ -44,25 +44,22 @@ public class ApiFacade {
         return response.toString();
     }
 
-    private String parseJsonForAttribute(String json, String attributeName) throws IllegalArgumentException {
+    private String parseJson(String json, String attributeName) throws IllegalArgumentException {
         try {
-            // Create a JSON parser from the string
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(json);
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(json);
 
-            // If no attributeName is provided, return the full JSON string for debugging
-            if (attributeName == null || attributeName.isEmpty()) {
+            if (attributeName.isEmpty()) {
                 return jsonObject.toJSONString();
             }
 
-            // Return specific attribute if found
             if (jsonObject.containsKey(attributeName)) {
                 return jsonObject.get(attributeName).toString();
             } else {
-                throw new IllegalArgumentException("Attribute '" + attributeName + "' not found in the JSON response.");
+                throw new IllegalArgumentException("Attribute '" + attributeName + "' not found.");
             }
         } catch (ParseException e) {
-            throw new IllegalArgumentException("Error parsing JSON response: " + e.getMessage());
+            throw new IllegalArgumentException("Error parsing JSON: " + e.getMessage());
         }
     }
 }
+
